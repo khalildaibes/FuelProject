@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" fx:controller="gui.TrackerController" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="700.0" prefWidth="986.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+   <MenuButton fx:id="info"  layoutX="304.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Information">
+         <items>
+            <MenuItem fx:id="showProfile1" onAction="#showProfile" text="Personal Information" />
+            <MenuItem fx:id="subsPlan" mnemonicParsing="false" onAction="#subsPlan" text="Subscription Information" />
+            <MenuItem fx:id="updateSubsPlan" mnemonicParsing="false" onAction="#updateSubsPlan" text="Update Subscription Information" />
+            <MenuItem fx:id="carlist" mnemonicParsing="false" onAction="#carlist" text="Vehicle List" />
+            <MenuItem fx:id="addcar" mnemonicParsing="false" onAction="#addcar" text="Add Car" />
+         </items>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </MenuButton>
+      <MenuButton layoutX="404.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="117.0" style="-fx-background-color: transparent;" text="Shopping Cart ">
+         <items>
+            <MenuItem fx:id="cart" mnemonicParsing="false" onAction="#cart" text="Cart" />
+            <MenuItem fx:id="orderHistory" mnemonicParsing="false" onAction="#orderHistory" text="Orders History" />
+            <MenuItem fx:id="tracker" mnemonicParsing="false" onAction="#tracker" text="Tracker" />
+            <MenuItem fx:id="sales" mnemonicParsing="false" onAction="#sales" text="Sales" />
+         </items>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </MenuButton>
+      <MenuButton layoutX="521.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Purchase">
+         <items>
+            <MenuItem fx:id="buyProduct" mnemonicParsing="false" onAction="#buyProduct" text="Buy Product" />
+            <MenuItem fx:id="homeOrder" mnemonicParsing="false" onAction="#homeOrder" text="Home Fuel Order" />
+
+         </items>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </MenuButton>
+     <MenuButton layoutX="689.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="65.0" style="-fx-background-color: transparent;" text="Help">
+         <items>
+            <MenuItem fx:id="stationFind" mnemonicParsing="false" onAction="#stationFind" text="Station Finder" />
+            <MenuItem fx:id="contactUs" mnemonicParsing="false" onAction="#contactUs" text="Contact Us" />
+            <MenuItem fx:id="aboutUs" mnemonicParsing="false" onAction="#aboutUs" text="About Us!" />
+         </items>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </MenuButton>
+            <MenuButton layoutX="615.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="80.0" style="-fx-background-color: transparent;" text="Updates">
+         <items>
+            <MenuItem fx:id="news" mnemonicParsing="false" onAction="#news" text="News" />
+         </items>
+         <font>
+            <Font name="System Bold" size="12.0" />
+         </font>
+      </MenuButton>
+   
+      <ImageView fitHeight="129.0" fitWidth="243.0" layoutX="29.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/MYFUELlogo.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutY="100.0" prefHeight="5.0" prefWidth="987.0" style="-fx-background-color: #c10101;" />
+      <AnchorPane layoutX="871.0" layoutY="-7.0" prefHeight="127.0" prefWidth="7.0" style="-fx-background-color: c10101;" />
+      <AnchorPane layoutX="81.0" layoutY="75.0" minWidth="0.0" prefHeight="300.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="73.0" layoutY="85.0" minWidth="0.0" prefHeight="224.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="91.0" layoutY="54.0" minWidth="0.0" prefHeight="392.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="-16.0" layoutY="54.0" minWidth="0.0" prefHeight="392.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="125.0" layoutY="54.0" minWidth="0.0" prefHeight="392.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="121.0" layoutY="38.0" prefHeight="500.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: c10101;" />
+      <AnchorPane layoutY="109.0" prefHeight="12.0" prefWidth="987.0" style="-fx-background-color: #000847;" />
+      <Button fx:id="backHome" layoutX="729.0" layoutY="599.0" mnemonicParsing="false" onAction="#backHome" prefHeight="39.0" prefWidth="117.0" text="Back Home" textFill="#000847">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label contentDisplay="TOP" layoutX="459.0" layoutY="174.0" prefHeight="46.0" prefWidth="226.0" text="Track your order" underline="true">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="57.0" fitWidth="62.0" layoutX="902.0" layoutY="7.0">
+         <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/usergreen.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="searchBtn" layoutX="707.0" layoutY="279.0" mnemonicParsing="false" onAction="#searchBtn" prefHeight="39.0" prefWidth="98.0" style="-fx-background-color: transparent;" text="Search" textFill="#000847" underline="true">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <GridPane layoutX="347.0" layoutY="361.0" prefHeight="194.0" prefWidth="359.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="160.0" />
+          <ColumnConstraints hgrow="SOMETIMES" maxWidth="296.0" minWidth="10.0" prefWidth="211.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Status:">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label prefHeight="27.0" prefWidth="100.0" text="Order Date:" GridPane.rowIndex="1">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <Label text="Estimated Date:" GridPane.rowIndex="2">
+               <font>
+                  <Font size="18.0" />
+               </font></Label>
+            <TextField fx:id="status" editable="false" prefHeight="26.0" prefWidth="182.0" GridPane.columnIndex="1" />
+            <TextField fx:id="date" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <TextField fx:id="estimatedDate" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+         </children>
+      </GridPane>
+      <Label layoutX="347.0" layoutY="286.0" prefHeight="27.0" prefWidth="180.0" text="Type Order ID:">
+         <font>
+            <Font size="18.0" />
+         </font></Label>
+      <TextField fx:id="ordierID" layoutX="501.0" layoutY="286.0" prefHeight="26.0" prefWidth="206.0" />
+      <Label layoutX="334.0" layoutY="291.0" text="*" textFill="RED" />
+      <Button fx:id="logoutBtn" layoutX="881.0" layoutY="60.0" mnemonicParsing="false" onAction="#logoutBtn" style="-fx-background-color: transparent;" text="Log out" underline="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
