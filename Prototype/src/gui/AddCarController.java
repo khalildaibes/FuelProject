@@ -434,6 +434,22 @@ public class AddCarController
 
 	    @FXML
 	    void confirmBtn(ActionEvent event) throws IOException 
+//	    {
+//	
+//	    	FXMLLoader loader = new FXMLLoader();
+//
+//			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
+//			Stage primaryStage = new Stage();
+//			Pane root = loader.load(getClass().getResource("/gui/carAddedSuccessful.fxml").openStream());
+//
+//			Scene scene = new Scene(root);			
+//			primaryStage.setTitle("Car Added Successfully!");
+//
+//			primaryStage.setScene(scene);		
+//			primaryStage.show();
+//	    	
+//	    	
+//	    }
 	    {
 	
 	    	FXMLLoader loader = new FXMLLoader();
@@ -443,8 +459,8 @@ public class AddCarController
 			Pane root = loader.load(getClass().getResource("/gui/carAddedSuccessful.fxml").openStream());
 
 			Scene scene = new Scene(root);			
-			primaryStage.setTitle("Car Added Successfully!");
 
+			primaryStage.setTitle("Car Added BesBEs!");
 			primaryStage.setScene(scene);		
 			primaryStage.show();
 	    	
