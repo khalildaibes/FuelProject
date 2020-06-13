@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="572.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.hugeSaleController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="14.0" layoutY="168.0" lineSpacing="4.0" prefHeight="204.0" prefWidth="563.0" text="A sale that no one should miss!! 20% discount on&#10;all MyFuel services!&#10;Including Home Fueling, subscription plans and&#10;alot more!&#10;Don't miss it out!!">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Text layoutX="138.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Started 04/06/2020 - ends 11/06/2020">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutY="112.0" prefHeight="12.0" prefWidth="572.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutY="103.0" prefHeight="5.0" prefWidth="572.0" style="-fx-background-color: #c10101;" />
+      <Button fx:id="backMain" onAction="#back" layoutX="241.0" layoutY="549.0" mnemonicParsing="false" text="Cancel" textFill="#c10101">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Label layoutX="11.0" layoutY="36.0" text="HUGE SALE! " textFill="#c10101">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <Label layoutX="210.0" layoutY="36.0" text="  for an entire week!">
+         <font>
+            <Font size="40.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="159.0" fitWidth="302.0" layoutX="141.0" layoutY="368.0" pickOnBounds="true" preserveRatio="true">
+          <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/images%20(1).jpg" />
+         </image>
+
+      </ImageView>
+      <Text layoutX="203.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Event is expired!">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

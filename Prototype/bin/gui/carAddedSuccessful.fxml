@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" fx:controller="gui.successfulPage" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="344.0" prefWidth="500.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ImageView fitHeight="59.0" fitWidth="162.0" layoutX="7.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/MYFUELlogo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="59.0" layoutY="45.0" prefHeight="70.0" prefWidth="382.0" text="Car Added Successfully">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="189.0" fitWidth="162.0" layoutX="163.0" layoutY="103.0">
+         <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/Green%20v.png" />
+         </image>
+      </ImageView>
+      <Button fx:id="backHome" layoutX="188.0" layoutY="292.0" mnemonicParsing="false" onAction="#backHome" prefHeight="36.0" prefWidth="125.0" text="Home Page">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

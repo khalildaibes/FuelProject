@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="700.0" prefWidth="986.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AboutUsController">
+   <children>
+      <ImageView fitHeight="129.0" fitWidth="243.0" layoutX="29.0" layoutY="-3.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/MYFUELlogo.png" />
+         </image>
+      </ImageView>
+      <AnchorPane layoutY="100.0" prefHeight="5.0" prefWidth="987.0" style="-fx-background-color: #c10101;" />
+		<Button fx:id="stationFind" layoutX="264.0" layoutY="61.0" onAction="#stationFind" style="-fx-background-color: transparent;" text="Station Finder" underline="true">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="news" layoutX="411.0" layoutY="61.0" mnemonicParsing="false" onAction="#showNews" style="-fx-background-color: transparent;" text="News" underline="true">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="aboutus" layoutX="631.0" layoutY="61.0" onAction="#aboutus" style="-fx-background-color: transparent;" text="About Us!" underline="true">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Button>
+      <Button fx:id="contactus" layoutX="501.0" layoutY="61.0" onAction="#contactus" style="-fx-background-color: transparent;" text="Contact Us" underline="true">
+         <font>
+            <Font name="System Italic" size="18.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutX="871.0" layoutY="-7.0" prefHeight="127.0" prefWidth="7.0" style="-fx-background-color: c10101;" />
+      <AnchorPane layoutX="81.0" layoutY="75.0" minWidth="0.0" prefHeight="300.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="73.0" layoutY="85.0" minWidth="0.0" prefHeight="224.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="91.0" layoutY="54.0" minWidth="0.0" prefHeight="392.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="-16.0" layoutY="54.0" minWidth="0.0" prefHeight="392.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutX="81.0" layoutY="46.0" prefHeight="500.0" prefWidth="7.0" rotate="45.0" style="-fx-background-color: c10101;" />
+      <AnchorPane layoutY="109.0" prefHeight="12.0" prefWidth="987.0" style="-fx-background-color: #000847;" />
+      <Button fx:id="backMain" layoutX="802.0" layoutY="610.0" mnemonicParsing="false" onAction="#backMain" prefHeight="39.0" prefWidth="117.0" text="Main Page" textFill="#000847">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Button>
+      <Label contentDisplay="TOP" layoutX="303.0" layoutY="180.0" text="What is MyFuel">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="57.0" fitWidth="62.0" layoutX="900.0" layoutY="7.0">
+         <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/user%20(1).png" />
+         </image>
+      </ImageView>
+      <Text layoutX="161.0" layoutY="255.0" lineSpacing="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyFuel is a very delicated system, made especially for your service.&#10;The system supports quick fueling and home heating fuel orders.&#10;Using MyFuel you can manage your Dalkan service, track your fueling and receive special&#10;offers and deals made exclusively for you.&#10;It also features other services, such as tracking home fuel orders, finding nearby stations, etc'.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Label contentDisplay="TOP" layoutX="227.0" layoutY="151.0" rotate="26.6" text="?" textFill="#c10101">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="254.0" layoutY="183.0" rotate="-38.2" text="?" textFill="#c10101">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="268.0" layoutY="178.0" rotate="159.0" text="?" textFill="#c10101">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="287.0" layoutY="190.0" rotate="51.8" text="?" textFill="#c10101">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="227.0" layoutY="417.0" rotate="26.6" text="?" textFill="#c10101">
+         <font>
+            <Font size="64.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="254.0" layoutY="449.0" rotate="-38.2" text="?" textFill="#c10101">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="268.0" layoutY="444.0" rotate="159.0" text="?" textFill="#c10101">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="287.0" layoutY="456.0" rotate="51.8" text="?" textFill="#c10101">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <Label contentDisplay="TOP" layoutX="303.0" layoutY="441.0" text="Who made it">
+         <font>
+            <Font size="30.0" />
+         </font>
+      </Label>
+      <Text layoutX="160.0" layoutY="519.0" lineSpacing="15.0" strokeType="OUTSIDE" strokeWidth="0.0" text="MyFuel's idea was made by the geniuses lectrurers of the course Engineering Methods for&#10;Software Systems Development and -with alot of teamwork- implemented by the incredible Group 15.">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Button fx:id="loginBtn" layoutX="890.0" layoutY="61.0" mnemonicParsing="false" onAction="#loginBtn" style="-fx-background-color: transparent;" text="Log in" underline="true">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>

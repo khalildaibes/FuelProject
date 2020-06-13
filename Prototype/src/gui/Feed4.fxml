@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="631.0" prefWidth="572.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.hugeSaleController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="19.0" layoutY="181.0" lineSpacing="4.0" prefHeight="278.0" prefWidth="524.0" text="If you're a Dalkaner, enjoy your&#10;FREE morning coffee,right after&#10;you use Dalkan service!&#10;&#10;&#10;If you're not yet a Dalkaner, it's never too late to&#10;JOIN!&#10;">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Text layoutX="138.0" layoutY="150.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Started 02/04/2020 - ends 18/04/2020">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <AnchorPane layoutY="112.0" prefHeight="12.0" prefWidth="572.0" style="-fx-background-color: #000847;" />
+      <AnchorPane layoutY="103.0" prefHeight="5.0" prefWidth="572.0" style="-fx-background-color: #c10101;" />
+      <Button fx:id="backMain" onAction="#back" layoutX="241.0" layoutY="549.0" mnemonicParsing="false" text="Cancel" textFill="#c10101">
+         <font>
+            <Font name="System Bold" size="20.0" />
+         </font>
+      </Button>
+      <Text layoutX="203.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="This Event is expired!">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Text>
+      <Label layoutX="95.0" layoutY="50.0" text="Exclusive for Dalkaners!">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <ImageView fitHeight="163.0" fitWidth="166.0" layoutX="380.0" layoutY="164.0" pickOnBounds="true" preserveRatio="true">
+
+         <image>
+            <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/coffee.png" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
