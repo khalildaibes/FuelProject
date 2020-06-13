@@ -1,7 +1,9 @@
 package gui;
 
 import java.io.IOException;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import java.util.concurrent.TimeUnit;
 
 import javax.swing.JFrame;
@@ -9,9 +11,12 @@ import javax.swing.JFrame;
 
 import client.ChatClient;
 import client.ClientUI;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,24 +24,30 @@ import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 import logic.Employee;
+import logic.Product;
+import logic.Vehicle;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.ListView;
 
 
 
 
-public class ProductsController 
-{
+public class ProductsController implements Initializable
+{	ObservableList<Product> list= FXCollections.observableArrayList();
+
 
 	@FXML
     private Button backHome;
@@ -45,7 +56,20 @@ public class ProductsController
     private Button addtoCart;
 
     @FXML
-    private ListView<?> productsList;
+    private TableView <Product> productsList;
+
+
+    @FXML
+    private TableColumn<Product, String> pname;
+
+    @FXML
+    private TableColumn<Product, String> pid;
+
+    @FXML
+    private TableColumn<Product, String> price;
+
+    @FXML
+    private TableColumn<Product, String> quantity;
 
     @FXML
     private Button showProductDetails;
@@ -440,4 +464,37 @@ public void tracker(ActionEvent event) throws Exception
 		primaryStage.show();
 
     }
+    public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		/* carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicle id "));
+		 carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("owner id  "));
+		 carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("a id "));
+				
+		 */
+		pname.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
+		pid.setCellValueFactory(new PropertyValueFactory<Product, String>("product_id"));
+		price.setCellValueFactory(new PropertyValueFactory<Product, String>("price"));
+		
+		quantity.setCellValueFactory(new PropertyValueFactory<Product, String>("quantity"));
+		
+		
+		ArrayList<String> cmd=new ArrayList<String>();
+		cmd.add("GetProductListForGsdStation");
+		cmd.add(ChatClient.emp.getUsername());
+		cmd.add(ChatClient.emp.getPassword());
+		cmd.add("123456");///gas station id 
+		ClientUI.chat.accept(cmd);
+		load_Products_List();
+		
+	}
+	private void load_Products_List() {
+		// TODO Auto-generated method stub
+		ArrayList<Product> products =ChatClient.products;
+		for(int i=0;i<products.size();i++) {
+			list.add(products.get(i));
+		}
+		productsList.setItems(list);
+
+	}
+	
 }

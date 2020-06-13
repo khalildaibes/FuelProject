@@ -182,9 +182,9 @@ public class HomeCustomerController
 		Pane root = loader.load(getClass().getResource("/gui/entertxt.fxml").openStream());
 		entertxtController entertxt= loader.getController();
 		
-		entertxt.txt="Insert User Username";
-				entertxt.path="Personal information";
-				entertxt.command="GetUserData";
+		entertxt.txt="Username";
+				entertxt.path="Products";
+			
 		
 	
 		Scene scene = new Scene(root);			

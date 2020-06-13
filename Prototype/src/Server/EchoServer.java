@@ -43,12 +43,6 @@ public class EchoServer extends AbstractServer {
 	 * @param port The port number to connect on.
 	 * 
 	 */
-	 /**
-	 * Constructs an instance of the echo server.
-	 *
-	 * @param port The port number to connect on.
-	 * 
-	 */
 	public EchoServer(int port) {
 		super(port);
 	}
@@ -66,21 +60,41 @@ public class EchoServer extends AbstractServer {
 	public void handleMessageFromClient(Object msg, ConnectionToClient client) {
 		cmd = extracted(msg);
 		int flag = 0;
-
+//GetVehicleListForUser
 		System.out.println("Message received: " + msg + " from " + client);
 		if (cmd.get(0).equals("UpdateEmployee")) {
 
 			int x = UpdateEmployee(msg);
 			ArrayList<String> data = getEmployeeData(msg);
 			data.add(0, "EmployeeData");
-			this.sendToRequistedClient("EmployeeData, " + data, client);
+			this.sendToRequistedClient(data, client);
+		}
+		if (cmd.get(0).equals("GetVehicleListForUser")) {
+			// GetProductListForGsdStation
+			ArrayList<String> data = getCarsDataForUser(msg);
+			data.add(0, "CarsDataForUser");
+			this.sendToRequistedClient(data, client);
+		}
+		if (cmd.get(0).equals("GetProductListForGsdStation")) {
+			// GetProductListForGsdStation
+			ArrayList<String> data = GetProductListForGsdStation(msg);
+			data.add(0, "ProductsDataForGasStation");
+			this.sendToRequistedClient(data, client);
 		}
 		if (cmd.get(0).equals("UpdateUser")) {
 
 			int x = UpdateUser(msg);
-			ArrayList<String> data = getUserData(msg);
-			data.add(0, "EmployeeData");
-			this.sendToRequistedClient("EmployeeData, " + data, client);
+			if (isEmployee(cmd) == 1) {
+
+				ArrayList<String> data = getEmployeeData(msg);
+				data.add(0, "EmployeeData");
+				this.sendToRequistedClient(data, client);
+			} else {
+				ArrayList<String> data = getUserData(msg);
+				data.add(0, "EmployeeData");
+				this.sendToRequistedClient(data, client);
+			}
+
 		}
 
 		if (cmd.get(0).equals("GetEmployeeData")) {
@@ -92,11 +106,6 @@ public class EchoServer extends AbstractServer {
 		if (cmd.get(0).equals("GetUserData")) {
 			ArrayList<String> data = getUserData(msg);
 			data.add(0, "UserData");
-			this.sendToRequistedClient(data, client);
-		}
-		if (cmd.get(0).equals("GetGasStationData")) {
-			ArrayList<String> data = getGas_Station(msg);
-			data.add(0, "gasStationData");
 			this.sendToRequistedClient(data, client);
 		}
 
@@ -125,11 +134,43 @@ public class EchoServer extends AbstractServer {
 
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> getCarsDataForUser(Object msg) {
+		ArrayList<String> result = new ArrayList<String>();
+
+		try {
+
+			cmd = extracted(msg);
+			String id = getEmployeeIdUsingUsername(cmd);
+			String str = ("SELECT * FROM vehicle WHERE owner_id= (?) ;");
+			PreparedStatement st = conn.prepareStatement(str);
+			st.setString(1, id);
+			ResultSet rs = st.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+
+					result.add(rs.getString(i));
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	private int UpdateUser(Object msg) {
 		cmd = extracted(msg);
 		try {
 			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
-				String str = ("UPDATE user  SET id = (?) , fname = (?) , lname = (?) , email = (?) WHERE username =  (?) ; ");
+				String str = ("UPDATE user  SET id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username =  (?) ; ");
 				PreparedStatement st = conn.prepareStatement(str);
 				st = conn.prepareStatement(str);
 				st.setString(1, cmd.get(3));
@@ -156,9 +197,78 @@ public class EchoServer extends AbstractServer {
 
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	private ArrayList<String> extracted(Object msg) {
 		return (ArrayList<String>) msg;
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> GetVehicleListForUser(Object msg) {
+		ArrayList<String> result = new ArrayList<String>();
+
+		try {
+
+			cmd = extracted(msg);
+			String id = getEmployeeIdUsingUsername(cmd);
+			String str = ("SELECT * FROM vehicle WHERE owner_id= (?) ;");
+			PreparedStatement st = conn.prepareStatement(str);
+			st.setString(1, id);
+			ResultSet rs = st.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			System.out.println(rs);
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					result.add(rs.getString(i));
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> GetProductListForGsdStation(Object msg) {
+		ArrayList<String> result = new ArrayList<String>();
+
+		try {
+
+			cmd = extracted(msg);
+
+			String str = ("SELECT product_in_gas_station.product_id,product_in_gas_station.price,product_in_gas_station.quantity,product.name FROM product_in_gas_station,product WHERE station_id= (?) AND product.product_id= product_in_gas_station.product_id ;");
+			PreparedStatement st = conn.prepareStatement(str);
+			st.setString(1, cmd.get(3));
+			
+			ResultSet rs = st.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			System.out.println(rs);
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					result.add(rs.getString(i));
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private ArrayList<String> getUserData(Object msg) {
 		ArrayList<String> result = new ArrayList<String>();
@@ -177,9 +287,9 @@ public class EchoServer extends AbstractServer {
 			System.out.println(rs);
 			if (rs.next()) {
 				for (int i = 1; i <= columnsNumber; i++) {
-					
+					{
 						result.add(rs.getString(i));
-					
+					}
 
 				}
 			} else {
@@ -192,6 +302,8 @@ public class EchoServer extends AbstractServer {
 		return result;
 
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	private ArrayList<String> getEmployeeData(Object msg) {
 		// TODO Auto-generated method stub
@@ -223,6 +335,8 @@ public class EchoServer extends AbstractServer {
 
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	/**
 	 * This method overrides the one in the superclass. Called when the server
 	 * starts listening for connections.
@@ -246,6 +360,8 @@ public class EchoServer extends AbstractServer {
 	protected void serverStopped() {
 		System.out.println("Server has stopped listening for connections.");
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public String getEmployeeIdUsingUsername(ArrayList<String> cmd) {
 
@@ -274,6 +390,8 @@ public class EchoServer extends AbstractServer {
 
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public int isEmployee(ArrayList<String> cmd) {
 		try {
 			String ID;
@@ -300,6 +418,8 @@ public class EchoServer extends AbstractServer {
 		return 0;
 
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public int login(ArrayList<String> cmd) {
 		// ArrayList<String> result = getUserData(cmd);
@@ -331,6 +451,8 @@ public class EchoServer extends AbstractServer {
 		return 0;
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public int logout(ArrayList<String> cmd) {
 		try {
 			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
@@ -354,6 +476,8 @@ public class EchoServer extends AbstractServer {
 
 		return 0;
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public int UpdateEmployee(Object msg) {
 		System.out.println("before cmd  ");
@@ -410,6 +534,8 @@ public class EchoServer extends AbstractServer {
 		return 0;
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public int checkUser(String Username, String Password) {
 		try {
 
@@ -434,6 +560,8 @@ public class EchoServer extends AbstractServer {
 
 		return 0;
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 	public int loggedin(String Username) {
 		try {
@@ -467,6 +595,8 @@ public class EchoServer extends AbstractServer {
 		return 0;
 	}
 
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public ArrayList<String> getFieldsFromTable(Object msg) {
 
 		cmd = extracted(msg);
@@ -496,37 +626,45 @@ public class EchoServer extends AbstractServer {
 		return res;
 	}
 
-	public ArrayList<String> getGas_Station(Object msg) {
-		ArrayList<String> result = new ArrayList<String>();
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+	public String getGas_Station(Object msg) {
+		cmd = extracted(msg);
+
+		String Username;
+
+		Username = cmd.get(1);
 		try {
 
-			cmd = extracted(msg);
+			String str = ("SELECT * FROM gas_station WHERE station_id=123456 ;");
 
-			String str = ("SELECT * FROM gas_station WHERE station_id= (?)  ;");
 			PreparedStatement st = conn.prepareStatement(str);
-			st.setString(1, cmd.get(1));
-			ResultSet rs = st.executeQuery();
+
+			ResultSet rs = st.executeQuery(str);
 			ResultSetMetaData rsmd = rs.getMetaData();
 			int columnsNumber = rsmd.getColumnCount();
-			System.out.println(rs);
-			if (rs.next()) {
-				for (int i = 1; i <= columnsNumber; i++) {
-					
-						result.add(rs.getString(i));
-					
+			int j = 1;
+			while (rs.next()) {
+				System.out.println(rs.getInt(j++));
+				System.out.println(rs.getString(j++));
+				System.out.println(rs.getString(j++));
+				System.out.println(rs.getInt(j++));
 
-				}
-			} else {
-				return result;
 			}
+			for (int i = 1; i <= columnsNumber; i++) {
+				System.out.format("Column %d where gas station %s", i, rsmd.getColumnName(i));
+
+			}
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 
-		return result;
+		return "";
 
 	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 }
 
