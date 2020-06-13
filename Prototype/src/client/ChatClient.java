@@ -37,7 +37,13 @@ public class ChatClient extends AbstractClient {
 	public static int flag=0;///1 if user is logged in 2 if employee is logged in 
 	public static Employee emp = new Employee(null, null, null, null, null, null, null, null);
 	public static boolean awaitResponse = false;
-
+	public static ArrayList<Vehicle> cars=new ArrayList<Vehicle>();
+	public static ArrayList<Order> Orders=new ArrayList<Order>();
+	public static ArrayList<Product> products=new ArrayList<Product>();
+	public static ArrayList<Gas_Station> Gas_Stations=new ArrayList<Gas_Station>();
+	public static ArrayList<Reports> Reports=new ArrayList<Reports>();
+	public static ArrayList<Gas_Station> Gasstations=new ArrayList<Gas_Station>();
+	public static ArrayList<Plan> Plans=new ArrayList<Plan>();
 	// Constructors ****************************************************
 
 	/**
@@ -67,7 +73,6 @@ public class ChatClient extends AbstractClient {
 	public void handleMessageFromServer(Object msg) {
 		cmd = extracted(msg);
 		System.out.println("--> handleMessageFromServer");
-		System.out.println(msg);
 		awaitResponse = false;
 		try {
 	
@@ -85,6 +90,8 @@ public class ChatClient extends AbstractClient {
 	
 		///change this to be able to capyure the user and add it to the clients 	
 		this.User = new User(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6));
+		System.out.println("employee data recived");
+
 		//user: username id pssword name name2 email
 		System.out.println(User+"\n"+msg);
 		}
@@ -98,7 +105,43 @@ public class ChatClient extends AbstractClient {
 		}
 		if (cmd.get(0).equals("EmployeeData")) {
 			try {
-			this.emp = new Employee(result[1], result[2], result[3] , result[4], result[5], result[6],result[7],result[8]);
+				this.emp = new Employee(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6),cmd.get(10),cmd.get(11));
+				System.out.println("employee data recived");
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}
+
+		if (cmd.get(0).equals("ProductsDataForGasStation")) {
+			try {
+				cars.clear();
+				int i=1;
+				Product temp;
+			while(i<cmd.size()) {
+				
+				temp=new Product(Integer.parseInt(cmd.get(i++)),Float.parseFloat(cmd.get(i++)),Float.parseFloat(cmd.get(i++)),cmd.get(i++));
+				
+				products.add(temp);
+				System.out.println(temp);
+			}
+				
+				System.out.println("products data recived");
+			}catch (Exception e) {
+				// TODO: handle exception
+			}
+		}	if (cmd.get(0).equals("CarsDataForUser")) {
+			try {
+				cars.clear();
+				int i=1;
+				Vehicle temp;
+			while(i<cmd.size()) {
+				temp=new Vehicle(cmd.get(i++),cmd.get(i++),cmd.get(i++),cmd.get(i++),cmd.get(i++));
+				
+				cars.add(temp);
+				System.out.println(temp);
+			}
+				
+				System.out.println("cars data recived");
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -107,6 +150,8 @@ public class ChatClient extends AbstractClient {
 			try {
 				this.flag=2;
 			this.emp = new Employee(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6),cmd.get(10),cmd.get(11));
+			System.out.println("employee has logged in ");
+
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -114,6 +159,11 @@ public class ChatClient extends AbstractClient {
 		}catch (Exception e) {
 			e.printStackTrace();// TODO: handle exception
 		}
+	}
+
+	private void LoadCarsList(Object msg) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	private ArrayList<String> extracted(Object msg) {

@@ -52,6 +52,7 @@ public class EchoServer extends AbstractServer {
 		cmd = extracted(msg);
 		int flag = 0;
 //GetVehicleListForUser
+<<<<<<< HEAD
 //GetVehicleListForUser
 	System.out.println("Message received: " + msg + " from " + client);
 	if (cmd.get(0).equals("UpdateEmployee")) {
@@ -69,6 +70,10 @@ public class EchoServer extends AbstractServer {
 		this.sendToRequistedClient( data, client);
 	}
 	if (cmd.get(0).equals("GetVehicleListForUser")) {
+=======
+		System.out.println("Message received: " + msg + " from " + client);
+		if (cmd.get(0).equals("UpdateEmployee")) {
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 	
 		ArrayList<String> data = getCarsDataForUser(msg);
@@ -83,14 +88,45 @@ public class EchoServer extends AbstractServer {
 			ArrayList<String> data = getEmployeeData(msg);
 			data.add(0, "EmployeeData");
 			this.sendToRequistedClient(data, client);
+<<<<<<< HEAD
 		}else {
 		ArrayList<String> data = getUserData(msg);
 		data.add(0, "EmployeeData");
 		this.sendToRequistedClient(data, client);
+=======
+		}
+		if (cmd.get(0).equals("GetVehicleListForUser")) {
+			// GetProductListForGsdStation
+			ArrayList<String> data = getCarsDataForUser(msg);
+			data.add(0, "CarsDataForUser");
+			this.sendToRequistedClient(data, client);
+		}
+		if (cmd.get(0).equals("GetProductListForGsdStation")) {
+			// GetProductListForGsdStation
+			ArrayList<String> data = GetProductListForGsdStation(msg);
+			data.add(0, "ProductsDataForGasStation");
+			this.sendToRequistedClient(data, client);
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 		}
 
+<<<<<<< HEAD
 		
 	}
+=======
+			int x = UpdateUser(msg);
+			if (isEmployee(cmd) == 1) {
+
+				ArrayList<String> data = getEmployeeData(msg);
+				data.add(0, "EmployeeData");
+				this.sendToRequistedClient(data, client);
+			} else {
+				ArrayList<String> data = getUserData(msg);
+				data.add(0, "EmployeeData");
+				this.sendToRequistedClient(data, client);
+			}
+
+		}
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 	if (cmd.get(0).equals("GetEmployeeData")) {
 		ArrayList<String> data = getEmployeeData(msg);
@@ -98,11 +134,19 @@ public class EchoServer extends AbstractServer {
 		this.sendToRequistedClient(data, client);
 	}
 
+<<<<<<< HEAD
 	if (cmd.get(0).equals("GetUserData")) {
 		ArrayList<String> data = getUserData(msg);
 		data.add(0, "UserData");
 		this.sendToRequistedClient(data, client);
 	}
+=======
+		if (cmd.get(0).equals("GetUserData")) {
+			ArrayList<String> data = getUserData(msg);
+			data.add(0, "UserData");
+			this.sendToRequistedClient(data, client);
+		}
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 	if (cmd.get(0).equals("LogIn")) {
 		int x = login(cmd);
@@ -128,7 +172,58 @@ public class EchoServer extends AbstractServer {
 			this.sendToAllClients("Save");
 	}
 
+<<<<<<< HEAD
 }
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> getCarsDataForUser(Object msg) {
+		ArrayList<String> result = new ArrayList<String>();
+
+		try {
+
+			cmd = extracted(msg);
+			String id = getEmployeeIdUsingUsername(cmd);
+			String str = ("SELECT * FROM vehicle WHERE owner_id= (?) ;");
+			PreparedStatement st = conn.prepareStatement(str);
+			st.setString(1, id);
+			ResultSet rs = st.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+
+					result.add(rs.getString(i));
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private int UpdateUser(Object msg) {
+		cmd = extracted(msg);
+		try {
+			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
+				String str = ("UPDATE user  SET id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username =  (?) ; ");
+				PreparedStatement st = conn.prepareStatement(str);
+				st = conn.prepareStatement(str);
+				st.setString(1, cmd.get(3));
+				st.setString(2, cmd.get(4));
+				st.setString(3, cmd.get(5));
+				st.setString(4, cmd.get(6));
+				st.setString(5, cmd.get(1));
+				st.executeUpdate();
+				System.out.println("User Is Updated to " + cmd);
+				return 1;
+			} else {
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -137,6 +232,7 @@ public class EchoServer extends AbstractServer {
 
 
 
+<<<<<<< HEAD
 
 private ArrayList<String> getCarsDataForUser(Object msg) {
 	ArrayList<String> result = new ArrayList<String>();
@@ -162,12 +258,90 @@ private ArrayList<String> getCarsDataForUser(Object msg) {
 		
 	} catch (SQLException e) {
 		e.printStackTrace();
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> extracted(Object msg) {
+		return (ArrayList<String>) msg;
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 	}
 	System.out.println(result);
 	return result;
 }
 
 
+<<<<<<< HEAD
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> GetVehicleListForUser(Object msg) {
+		ArrayList<String> result = new ArrayList<String>();
+
+		try {
+
+			cmd = extracted(msg);
+			String id = getEmployeeIdUsingUsername(cmd);
+			String str = ("SELECT * FROM vehicle WHERE owner_id= (?) ;");
+			PreparedStatement st = conn.prepareStatement(str);
+			st.setString(1, id);
+			ResultSet rs = st.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			System.out.println(rs);
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					result.add(rs.getString(i));
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> GetProductListForGsdStation(Object msg) {
+		ArrayList<String> result = new ArrayList<String>();
+
+		try {
+
+			cmd = extracted(msg);
+
+			String str = ("SELECT product_in_gas_station.product_id,product_in_gas_station.price,product_in_gas_station.quantity,product.name FROM product_in_gas_station,product WHERE station_id= (?) AND product.product_id= product_in_gas_station.product_id ;");
+			PreparedStatement st = conn.prepareStatement(str);
+			st.setString(1, cmd.get(3));
+			
+			ResultSet rs = st.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			System.out.println(rs);
+			while (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					result.add(rs.getString(i));
+				}
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		System.out.println(result);
+		return result;
+
+	}
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> getUserData(Object msg) {
+		ArrayList<String> result = new ArrayList<String>();
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -183,6 +357,7 @@ private int UpdateUser(Object msg) {
 		if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
 			String str = ("UPDATE user  SET id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username =  (?) ; ");
 			PreparedStatement st = conn.prepareStatement(str);
+<<<<<<< HEAD
 			st = conn.prepareStatement(str);
 			st.setString(1, cmd.get(3));
 			st.setString(2, cmd.get(4));
@@ -195,6 +370,19 @@ private int UpdateUser(Object msg) {
 		} else {
 
 			System.out.println("User  NOT Found");
+=======
+			st.setString(1, cmd.get(1));
+			st.setString(2, cmd.get(2));
+			ResultSet rs = st.executeQuery();
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			System.out.println(rs);
+			if (rs.next()) {
+				for (int i = 1; i <= columnsNumber; i++) {
+					{
+						result.add(rs.getString(i));
+					}
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 		}
 	} catch (SQLException e) {
@@ -260,7 +448,15 @@ private ArrayList<String> GetVehicleListForUser(Object msg) {
 	System.out.println(result);
 	return result;
 
+<<<<<<< HEAD
 }
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	private ArrayList<String> getEmployeeData(Object msg) {
+		// TODO Auto-generated method stub
+		ArrayList<String> result = new ArrayList<String>();
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -304,9 +500,33 @@ private ArrayList<String> getUserData(Object msg) {
 
 }
 
+<<<<<<< HEAD
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	/**
+	 * This method overrides the one in the superclass. Called when the server
+	 * starts listening for connections.
+	 */
+	protected void serverStarted()// change
+	{
+		try {
+			conn = DriverManager.getConnection("jdbc:mysql://localhost/test?serverTimezone=IST", "root", "Aa123456");
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		System.out.println("Server listening for connections on port " + getPort());
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
+<<<<<<< HEAD
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public String getEmployeeIdUsingUsername(ArrayList<String> cmd) {
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -375,6 +595,18 @@ private ArrayList<String> addNewCarData(Object msg)
 		return result;
 	}
 
+<<<<<<< HEAD
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int isEmployee(ArrayList<String> cmd) {
+		try {
+			String ID;
+			ID = getEmployeeIdUsingUsername(cmd);
+			String str = ("SELECT employee_id FROM employee WHERE employee_id= (?) ; ");
+			PreparedStatement st = conn.prepareStatement(str);
+			st.setString(1, ID);
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 }
 
@@ -405,7 +637,15 @@ protected void serverStarted()// change
 	}
 	System.out.println("Server listening for connections on port " + getPort());
 
+<<<<<<< HEAD
 }
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int login(ArrayList<String> cmd) {
+		// ArrayList<String> result = getUserData(cmd);
+		ArrayList<String> result = null;
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 /**
  * This method overrides the one in the superclass. Called when the server stops
@@ -448,9 +688,19 @@ public String getEmployeeIdUsingUsername(ArrayList<String> cmd) {
 		e.printStackTrace();
 	}
 
+<<<<<<< HEAD
 	return "";
 
 }
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int logout(ArrayList<String> cmd) {
+		try {
+			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
+				String str = ("UPDATE users SET connected=0 WHERE username= (?) AND password= (?) ; ");
+				PreparedStatement st = conn.prepareStatement(str);
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -485,6 +735,7 @@ public int isEmployee(ArrayList<String> cmd) {
 		e.printStackTrace();
 	}
 
+<<<<<<< HEAD
 	return 0;
 
 }
@@ -494,6 +745,51 @@ public int isEmployee(ArrayList<String> cmd) {
 
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int UpdateEmployee(Object msg) {
+		System.out.println("before cmd  ");
+		cmd = extracted(msg);
+		System.out.println("before everythging  ");
+		try {
+			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
+				System.out.println("after try  ");
+				String str1 = ("UPDATE user  SET  password = (?), id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username = (?) ; ");
+
+				PreparedStatement st1 = conn.prepareStatement(str1);
+
+				System.out.println("before");
+
+				st1 = conn.prepareStatement(str1);
+
+				System.out.println("before get string 4 ");
+				st1.setString(1, cmd.get(4));
+				System.out.println("before get string 3 ");
+				st1.setString(2, cmd.get(3));
+				System.out.println("before get string 5");
+				st1.setString(3, cmd.get(5));
+				System.out.println("before get string 6");
+				st1.setString(4, cmd.get(6));
+				System.out.println("before get string 7");
+				st1.setString(5, cmd.get(7));
+				System.out.println("before get string 1");
+				st1.setString(6, cmd.get(1));
+				System.out.println("after");
+				System.out.println("here " + st1.executeUpdate());
+
+				String str = ("UPDATE employee  SET employee_id = (?) , rule = (?) , station_id = (?) WHERE employee_id = (SELECT id FROM user WHERE username = (?) ) ; ");
+				PreparedStatement st = conn.prepareStatement(str);
+				st = conn.prepareStatement(str);
+
+				st.setString(1, cmd.get(3));
+				st.setString(2, cmd.get(9));
+				st.setString(3, cmd.get(8));
+				st.setString(4, cmd.get(1));
+				System.out.println("here " + st.executeUpdate());
+				return 1;
+			} else {
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -529,6 +825,13 @@ public int login(ArrayList<String> cmd) {
 	return 0;
 }
 
+<<<<<<< HEAD
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int checkUser(String Username, String Password) {
+		try {
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -560,6 +863,7 @@ public int logout(ArrayList<String> cmd) {
 		e.printStackTrace();
 	}
 
+<<<<<<< HEAD
 	return 0;
 }
 
@@ -569,6 +873,12 @@ public int logout(ArrayList<String> cmd) {
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int loggedin(String Username) {
+		try {
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -702,8 +1012,14 @@ public int loggedin(String Username) {
 		e.printStackTrace();
 	}
 
+<<<<<<< HEAD
 	return 0;
 }
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public ArrayList<String> getFieldsFromTable(Object msg) {
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 
 
@@ -741,6 +1057,7 @@ public ArrayList<String> getFieldsFromTable(Object msg) {
 		e.printStackTrace();
 	}
 
+<<<<<<< HEAD
 	return res;
 }
 
@@ -776,16 +1093,55 @@ public String getGas_Station(Object msg) {
 			System.out.println(rs.getString(j++));
 			System.out.println(rs.getInt(j++));
 
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public String getGas_Station(Object msg) {
+		cmd = extracted(msg);
+
+		String Username;
+
+		Username = cmd.get(1);
+		try {
+
+			String str = ("SELECT * FROM gas_station WHERE station_id=123456 ;");
+
+			PreparedStatement st = conn.prepareStatement(str);
+
+			ResultSet rs = st.executeQuery(str);
+			ResultSetMetaData rsmd = rs.getMetaData();
+			int columnsNumber = rsmd.getColumnCount();
+			int j = 1;
+			while (rs.next()) {
+				System.out.println(rs.getInt(j++));
+				System.out.println(rs.getString(j++));
+				System.out.println(rs.getString(j++));
+				System.out.println(rs.getInt(j++));
+
+			}
+			for (int i = 1; i <= columnsNumber; i++) {
+				System.out.format("Column %d where gas station %s", i, rsmd.getColumnName(i));
+
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 		}
 		for (int i = 1; i <= columnsNumber; i++) {
 			System.out.format("Column %d where gas station %s", i, rsmd.getColumnName(i));
 
+<<<<<<< HEAD
 		}
+=======
+		return "";
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
 
+<<<<<<< HEAD
 	return "";
 
 }
@@ -800,6 +1156,10 @@ public String getGas_Station(Object msg) {
 
 
 
+=======
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+>>>>>>> b93a3b2a40e4e4620f11ca72ddaff9f803fb48ee
 }
 
 //End of EchoServer class
