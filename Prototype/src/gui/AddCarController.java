@@ -13,6 +13,8 @@ import javax.swing.JFrame;
 
 import client.ChatClient;
 import client.ClientUI;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -40,7 +42,9 @@ import javafx.scene.control.ListView;
 
 public class AddCarController 
 {
-	 @FXML
+	ObservableList<String> Ftype=FXCollections.observableArrayList("95","Diesel","Scooter fuel");
+
+	 	@FXML
 	    private Button confirmBtn;
 
 	    @FXML
@@ -50,7 +54,7 @@ public class AddCarController
 	    private TextField carId;
 
 	    @FXML
-	    private ComboBox<?> fuelType;
+	    private ComboBox fuelType;
 
 	    @FXML
 	    private CheckBox checkPrivate;
@@ -100,9 +104,15 @@ public class AddCarController
 		private MenuItem carlist=null;
 		@FXML
 		private MenuItem addcar=null;
+		
+		@FXML
+		private void initialize()
+		{
+			fuelType.setValue("choose");
+			fuelType.setItems(Ftype);
+		}
 
-
-	public void updateSubsPlan(ActionEvent event) throws Exception 
+		public void updateSubsPlan(ActionEvent event) throws Exception 
 		{
 
 
@@ -431,39 +441,69 @@ public class AddCarController
 			primaryStage.show();
 
 	    }
+		private String getCarID() {
+			return carId.getText();
+		}
 
+		private String getDalkanCheck() {
+			if(checkDalkan.isSelected())
+				return "1";
+			return "0";
+		}
+		private String checkPrivate() {
+			if(checkPrivate.isSelected())
+				return "1";
+			return "0";
+		}
+		private String checkCompany() {
+			if(checkCompany.isSelected())
+				return "1";
+			return "0";
+		}
+		private String getFuelType() {
+			return fuelType.getValue().toString();
+		}
 	    @FXML
 	    void confirmBtn(ActionEvent event) throws IOException 
-//	    {
-//	
-//	    	FXMLLoader loader = new FXMLLoader();
-//
-//			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
-//			Stage primaryStage = new Stage();
-//			Pane root = loader.load(getClass().getResource("/gui/carAddedSuccessful.fxml").openStream());
-//
-//			Scene scene = new Scene(root);			
-//			primaryStage.setTitle("Car Added Successfully!");
-//
-//			primaryStage.setScene(scene);		
-//			primaryStage.show();
-//	    	
-//	    	
-//	    }
 	    {
 	
-	    	FXMLLoader loader = new FXMLLoader();
+	    	ArrayList<String> Al = new ArrayList<String>();
+			String carid, checkdalkan,checkprivate,checkcompany,fueltype;
+			carid=getCarID();
+			checkdalkan=getDalkanCheck();
+			checkprivate=checkPrivate();
+			checkcompany=checkCompany();
+			fueltype=getFuelType();
+			if (carid.trim().isEmpty()) //we will check the rest later
+			{
+
+				System.out.println("You must enter a CarID");
+
+			} 
+			else
+			{
+				Al.add("AddNewCar");
+				Al.add(carid);// change
+				Al.add(checkdalkan);
+				Al.add(fueltype);
+				Al.add(checkprivate);
+				Al.add(checkcompany);
+				
+
+				ClientUI.chat.accept(Al);
+			}    	
+	    		
+	    	/*FXMLLoader loader = new FXMLLoader();
 
 			((Node)event.getSource()).getScene().getWindow().hide(); //hiding primary window
 			Stage primaryStage = new Stage();
 			Pane root = loader.load(getClass().getResource("/gui/carAddedSuccessful.fxml").openStream());
 
 			Scene scene = new Scene(root);			
+			primaryStage.setTitle("Car Added Successfully!");
 
-			primaryStage.setTitle("Car Added BesBEs!");
 			primaryStage.setScene(scene);		
-			primaryStage.show();
-	    	
+			primaryStage.show();*/
 	    	
 	    }
 
