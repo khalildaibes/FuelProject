@@ -357,7 +357,7 @@ private ArrayList<String> addNewCarData(Object msg)
 
 		cmd = extracted(msg);
 
-		String str = ("INSERT INTO vehicle (vehicle_id,owner_id,dalkan,fuel_type,Isprivate,Iscompany) VALUES ((?),(?),(?),(?),(?),(?));");
+		String str = ("INSERT INTO vehicle (vehicle_id,owner_id,dalkan,fuel_type,Iscompany) VALUES ((?),(?),(?),(?),(?));");
 		PreparedStatement st = conn.prepareStatement(str);
 		st = conn.prepareStatement(str);
 		st.setString(1, cmd.get(1));
