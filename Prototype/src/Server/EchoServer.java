@@ -43,6 +43,12 @@ public class EchoServer extends AbstractServer {
 	 * @param port The port number to connect on.
 	 * 
 	 */
+	 /**
+	 * Constructs an instance of the echo server.
+	 *
+	 * @param port The port number to connect on.
+	 * 
+	 */
 	public EchoServer(int port) {
 		super(port);
 	}
