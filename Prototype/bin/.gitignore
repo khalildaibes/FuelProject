@@ -1,5 +1,4 @@
-/common/
-/gui/
-/Server/
 /client/
+/gui/
 /logic/
+/Server/

@@ -3,15 +3,25 @@ package gui;
 import javafx.fxml.FXML;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 
 import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.ResourceBundle;
+
+
 import javafx.scene.control.MenuButton;
 import javafx.scene.control.MenuItem;
 import client.ChatClient;
 import client.ClientUI;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.embed.swt.FXCanvas;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -19,35 +29,42 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import logic.Employee;
+import logic.Vehicle;
 
-public class CarListController 
-{
+
+public class CarListController  implements Initializable
+{	ObservableList<Vehicle> list= FXCollections.observableArrayList();
+
 	 	@FXML
 	    private Button backHome;
 
 	 	@FXML
 	    private Button deleteBtn;
+	 	
+	    @FXML
+	    private TableView<Vehicle> vehicleList;
+	    @FXML
+	    private TableColumn<Vehicle, String> carIdCulm;
 
 	    @FXML
-	    private TableColumn<?, ?> carIdCulm;
+	    private TableColumn<Vehicle, String> customerIdCulm;
 
 	    @FXML
-	    private TableColumn<?, ?> customerIdCulm;
+	    private TableColumn<Vehicle, String> modelCulm;
 
 	    @FXML
-	    private TableColumn<?, ?> modelCulm;
+	    private TableColumn<Vehicle, String> dalkanCulm;
 
 	    @FXML
-	    private TableColumn<?, ?> dalkanCulm;
+	    private TableColumn<Vehicle, String> fuelTypeCulm;
 
 	    @FXML
-	    private TableColumn<?, ?> fuelTypeCulm;
-
-	    @FXML
-	    private TableColumn<?, ?> planIdCulm;
+	    private TableColumn<Vehicle, String> planIdCulm;
 
 	    @FXML
 	    private Button logoutBtn;
@@ -416,6 +433,45 @@ public class CarListController
 			primaryStage.show();
 
 	    }
+		@Override
+		public void initialize(URL arg0, ResourceBundle arg1) {
+			// TODO Auto-generated method stub
+			/* carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicle id "));
+			 carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("owner id  "));
+			 carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("a id "));
+					
+			 */
+			carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicle_id"));
+			customerIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("owner"));
+			modelCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("model"));
+			
+			fuelTypeCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("fuel_type"));
+			
+			planIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("package_id"));
+		
+			ArrayList<String> cmd=new ArrayList<String>();
+			cmd.add("GetVehicleListForUser");
+			cmd.add(ChatClient.emp.getUsername());
+			cmd.add(ChatClient.emp.getPassword());
+			ClientUI.chat.accept(cmd);
+			load_Vehicle_List();
+			
+		}
+		
+	
+		private void load_Vehicle_List() {
+			// TODO Auto-generated method stub
+			ArrayList<Vehicle> cars =ChatClient.cars;
+			for(int i=0;i<cars.size();i++) {
+				list.add(cars.get(i));
+			}
+			vehicleList.setItems(list);
+	
+		
+		 
+		
+			
+		}
 
 
 }

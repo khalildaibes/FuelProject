@@ -19,8 +19,8 @@ import logic.Employee;
 
 public class entertxtController implements Initializable {
 	public String txt = "enter employee number";
-	public String path = "EmployeeUpdate";
-	public String command = "GetGasStationData";
+	public String path = "Car List";
+
 	ArrayList<String> cmd = new ArrayList<String>();
 
 	@FXML
@@ -38,7 +38,7 @@ public class entertxtController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		// TODO Auto-generated method stub
-		text1.setText(command);
+
 		text2.setText(txt);
 	}
 
@@ -46,39 +46,54 @@ public class entertxtController implements Initializable {
 		FXMLLoader loader = new FXMLLoader();
 		Stage primaryStage = new Stage();
 
-	
 		if (path == "Personal information") {
-			if(ChatClient.flag==1) {
-			cmd.add(command);
-			cmd.add(ChatClient.User.getUsername());
-			cmd.add(ChatClient.User.getPassword());
-			cmd.add("123456");
-			ClientUI.chat.accept(cmd);
-			UpdateCustomerInformationController customerController= loader.getController();
-			customerController.loadUser(ChatClient.User);
-			}
-			if(ChatClient.flag==2)
+			if (ChatClient.flag == 1) {
+				String command = "GetUserData";
 				cmd.add(command);
-			cmd.add(ChatClient.emp.getUsername());
-			cmd.add(ChatClient.emp.getPassword());
-			cmd.add("123456");
-			ClientUI.chat.accept(cmd);
-			UpdateCustomerInformationController customerController= loader.getController();
-			Employee emp=new Employee(ChatClient.emp.getUsername(),ChatClient.emp.getId(), ChatClient.emp.getPassword(),ChatClient.emp.getFName(),ChatClient.emp.getLName(),ChatClient.emp.getEmail(),ChatClient.emp.getStation_id(),ChatClient.emp.getRole());
+				cmd.add(ChatClient.User.getUsername());
+				cmd.add(ChatClient.User.getPassword());
+				ClientUI.chat.accept(cmd);
+				UpdateCustomerInformationController customerController = loader.getController();
+				customerController.loadUser(ChatClient.User);
+			}
+			if (ChatClient.flag == 2) {
+				String command = "GetEmployeeData";
+				cmd.add(command);
+				cmd.add(ChatClient.emp.getUsername());
+				cmd.add(ChatClient.emp.getPassword());
+				ClientUI.chat.accept(cmd);
+				UpdateCustomerInformationController customerController = loader.getController();
 
+				// System.out.println(emp);
+			}
 			Pane root = loader.load(getClass().getResource("/gui/" + path + ".fxml").openStream());
 			Scene scene = new Scene(root);
 			primaryStage.setTitle("Update Subscription");
-		//	customerController.loadUser(emp);
+			// customerController.loadUser(emp);
 			primaryStage.setScene(scene);
 			primaryStage.show();
-			
 
 		}
+else  if (path == "Car List") {
+			
+			Pane root = loader.load(getClass().getResource("/gui/" + path + ".fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("Update Subscription");
+			// customerController.loadUser(emp);
+			primaryStage.setScene(scene);
+			primaryStage.show();
 
+		}else  if (path == "Products") {
+			
+			Pane root = loader.load(getClass().getResource("/gui/" + path + ".fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("Update Subscription");
+			// customerController.loadUser(emp);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+
+		}
 		// info.getScene().getWindow().hide();//hise the shit
-
-		
 
 	}
 
@@ -98,5 +113,42 @@ public class entertxtController implements Initializable {
 		primaryStage.setScene(scene);
 		primaryStage.show();
 
+	}
+
+	public int setRequestByPath() {
+		FXMLLoader loader = new FXMLLoader();
+		Stage primaryStage = new Stage();
+
+		if (path == "Personal information") {
+	try {		if (ChatClient.flag == 1) {
+				String command = "GetUserData";
+				cmd.add(command);
+				cmd.add(ChatClient.User.getUsername());
+				cmd.add(ChatClient.User.getPassword());
+				ClientUI.chat.accept(cmd);
+				UpdateCustomerInformationController customerController = loader.getController();
+				customerController.loadUser(ChatClient.User);
+			}
+			if (ChatClient.flag == 2) {
+				String command = "GetEmployeeData";
+				cmd.add(command);
+				cmd.add(ChatClient.emp.getUsername());
+				cmd.add(ChatClient.emp.getPassword());
+				ClientUI.chat.accept(cmd);
+				UpdateCustomerInformationController customerController = loader.getController();
+				customerController.loadUser(ChatClient.emp);
+				// System.out.println(emp);
+			}
+			Pane root = loader.load(getClass().getResource("/gui/" + path + ".fxml").openStream());
+			Scene scene = new Scene(root);
+			primaryStage.setTitle("Update Subscription");
+			// customerController.loadUser(emp);
+			primaryStage.setScene(scene);
+			primaryStage.show();
+	}catch (Exception e) {
+		// TODO: handle exception
+	}
+		}
+		return 0;
 	}
 }
