@@ -61,6 +61,10 @@ public class ChatClient extends AbstractClient {
 
 	// Instance methods ************************************************
 
+
+
+
+
 	/**
 	 * This method handles all data that comes in from the server.
 	 *
@@ -91,7 +95,14 @@ public class ChatClient extends AbstractClient {
 		//user: username id pssword name name2 email
 		System.out.println(User+"\n"+msg);
 		}
-		
+		if(cmd.get(0).equals("NewCarData"))
+		{
+			try {
+				System.out.println("New Car"+"\n"+msg);
+				}catch (Exception e) {
+					// TODO: handle exception
+				}
+		}
 		if (cmd.get(0).equals("EmployeeData")) {
 			try {
 				this.emp = new Employee(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6),cmd.get(10),cmd.get(11));
