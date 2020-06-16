@@ -519,7 +519,7 @@ ObservableList<String> Ctype=FXCollections.observableArrayList("Private","Bussin
 			typeStar.setVisible(false);
 			missedRF.setVisible(false);
 		}
-		if(!(IsEmpty(this.Fname))&&!(IsEmpty(this.Lname))&&!(IsEmpty(this.id))&&!(IsEmpty(this.email))&&!(IsEmpty(this.rePass))&&!(cusType.getValue().equals("choose")))
+		if(!(IsEmpty(this.Fname))&&!(IsEmpty(this.Lname))&&!(IsEmpty(this.id))&&!(IsEmpty(this.email))&&((!(IsEmpty(this.rePass))&&!(IsEmpty(this.pass)))||((IsEmpty(this.rePass))&&(IsEmpty(this.pass))))&&!(cusType.getValue().equals("choose")))
 		{
 			System.out.println("Saving The New Data In The Server");
 			employeesArrayList.add("UpdateUser");
