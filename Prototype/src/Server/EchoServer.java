@@ -123,6 +123,7 @@ public class EchoServer extends AbstractServer {
 				}
 
 			}
+			System.out.println("ok "+data.toString());
 			this.sendToRequistedClient(data, client);
 
 		}
@@ -170,7 +171,7 @@ public class EchoServer extends AbstractServer {
 		cmd = extracted(msg);
 		try {
 			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
-				String str = ("UPDATE user  SET id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username =  (?) ; ");
+				String str = ("UPDATE registered_user  SET id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username =  (?) ; ");
 				PreparedStatement st = conn.prepareStatement(str);
 				st = conn.prepareStatement(str);
 				st.setString(1, cmd.get(3));
@@ -277,7 +278,7 @@ public class EchoServer extends AbstractServer {
 
 			cmd = extracted(msg);
 
-			String str = ("SELECT * FROM user WHERE username= (?) AND password= (?) ;");
+			String str = ("SELECT * FROM registered_user WHERE username= (?) AND password= (?) ;");
 			PreparedStatement st = conn.prepareStatement(str);
 			st.setString(1, cmd.get(1));
 			st.setString(2, cmd.get(2));
@@ -313,7 +314,7 @@ public class EchoServer extends AbstractServer {
 
 			cmd = extracted(msg);
 
-			String str = ("SELECT user.* , employee.station_id , employee.role FROM employee,user WHERE user.username= (?) AND user.id=employee.employee_id ;");
+			String str = ("SELECT registered_user.* , employee.station_id , employee.role FROM registered_user,employee WHERE registered_user.username= (?) AND registered_user.id=employee.id ;");
 			PreparedStatement st = conn.prepareStatement(str);
 			st.setString(1, cmd.get(1));
 			ResultSet rs = st.executeQuery();
@@ -325,6 +326,8 @@ public class EchoServer extends AbstractServer {
 					result.add(rs.getString(i));
 				}
 			} else {
+				System.out.println(result);
+
 				return result;
 			}
 		} catch (SQLException e) {
@@ -369,8 +372,7 @@ public class EchoServer extends AbstractServer {
 
 		Username = cmd.get(1);
 		try {
-
-			String str = ("SELECT user.id FROM user WHERE user.username= " + Username + " ;");
+			String str = ("SELECT registered_user.id FROM registered_user WHERE registered_user.username= '" + Username + "' ;");
 
 			PreparedStatement st = conn.prepareStatement(str);
 			ResultSet rs = st.executeQuery(str);
@@ -380,7 +382,6 @@ public class EchoServer extends AbstractServer {
 
 				result = rs.getString(1);
 			}
-
 			return result;
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -396,7 +397,7 @@ public class EchoServer extends AbstractServer {
 		try {
 			String ID;
 			ID = getEmployeeIdUsingUsername(cmd);
-			String str = ("SELECT employee_id FROM employee WHERE employee_id= (?) ; ");
+			String str = ("SELECT id FROM employee WHERE id= (?) ; ");
 			PreparedStatement st = conn.prepareStatement(str);
 			st.setString(1, ID);
 
@@ -429,7 +430,7 @@ public class EchoServer extends AbstractServer {
 
 			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
 
-				String str = ("UPDATE user SET connected = 1 WHERE username= (?) AND password= (?) ; ");
+				String str = ("UPDATE registered_user SET connected = 1 WHERE username= (?) AND password= (?) ; ");
 				PreparedStatement st = conn.prepareStatement(str);
 				st = conn.prepareStatement(str);
 				st.setString(1, cmd.get(1));
@@ -456,7 +457,7 @@ public class EchoServer extends AbstractServer {
 	public int logout(ArrayList<String> cmd) {
 		try {
 			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
-				String str = ("UPDATE users SET connected=0 WHERE username= (?) AND password= (?) ; ");
+				String str = ("UPDATE registered_user SET connected=0 WHERE username= (?) AND password= (?) ; ");
 				PreparedStatement st = conn.prepareStatement(str);
 
 				st = conn.prepareStatement(str);
@@ -486,7 +487,7 @@ public class EchoServer extends AbstractServer {
 		try {
 			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
 				System.out.println("after try  ");
-				String str1 = ("UPDATE user  SET  password = (?), id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username = (?) ; ");
+				String str1 = ("UPDATE registered_user  SET  password = (?), id = (?) , first_name = (?) , last_name = (?) , email = (?) WHERE username = (?) ; ");
 
 				PreparedStatement st1 = conn.prepareStatement(str1);
 
@@ -509,7 +510,7 @@ public class EchoServer extends AbstractServer {
 				System.out.println("after");
 				System.out.println("here " + st1.executeUpdate());
 
-				String str = ("UPDATE employee  SET employee_id = (?) , rule = (?) , station_id = (?) WHERE employee_id = (SELECT id FROM user WHERE username = (?) ) ; ");
+				String str = ("UPDATE employee  SET id = (?) , role = (?) , station_id = (?) WHERE id = (SELECT id FROM registered_user WHERE username = (?) ) ; ");
 				PreparedStatement st = conn.prepareStatement(str);
 				st = conn.prepareStatement(str);
 
@@ -539,7 +540,7 @@ public class EchoServer extends AbstractServer {
 	public int checkUser(String Username, String Password) {
 		try {
 
-			String str = ("SELECT username,password FROM user WHERE username= (?) AND password= (?) ; ");
+			String str = ("SELECT username,password FROM registered_user WHERE username= (?) AND password= (?) ; ");
 			PreparedStatement st = conn.prepareStatement(str);
 			st.setString(1, Username);
 			st.setString(2, Password);
@@ -566,7 +567,7 @@ public class EchoServer extends AbstractServer {
 	public int loggedin(String Username) {
 		try {
 
-			String str = ("SELECT connected FROM user WHERE username= (?)  ; ");
+			String str = ("SELECT connected FROM registered_user WHERE username= (?)  ; ");
 			PreparedStatement st = conn.prepareStatement(str);
 			st.setString(1, Username);
 
