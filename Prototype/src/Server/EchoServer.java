@@ -171,14 +171,15 @@ public class EchoServer extends AbstractServer {
 		cmd = extracted(msg);
 		try {
 			if (checkUser(cmd.get(1), cmd.get(2)) == 1) {
-				String str = ("UPDATE registered_user  SET id = (?) , firstname = (?) , lastname = (?) , email = (?) WHERE username =  (?) ; ");
+				String str = ("UPDATE registered_user  SET id = (?) , First_name = (?) , Last_name = (?) , Email = (?) ,password = (?)  WHERE username =  (?) ; ");
 				PreparedStatement st = conn.prepareStatement(str);
 				st = conn.prepareStatement(str);
 				st.setString(1, cmd.get(3));
 				st.setString(2, cmd.get(4));
 				st.setString(3, cmd.get(5));
 				st.setString(4, cmd.get(6));
-				st.setString(5, cmd.get(1));
+				st.setString(5, cmd.get(7));
+				st.setString(6, cmd.get(1));
 				st.executeUpdate();
 				System.out.println("User Is Updated to " + cmd);
 				return 1;

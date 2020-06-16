@@ -8,6 +8,8 @@ import javax.swing.JFrame;
 
 import client.ChatClient;
 import client.ClientUI;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -25,7 +27,7 @@ import logic.Employee;
 import logic.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.CheckBox;
-import javafx.scene.control.ChoiceBox;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 
@@ -55,14 +57,34 @@ public class UpdateCustomerInformationController {
 	private Label customerId;
 
 	@FXML
+	private Label userlbl;
+	
+	@FXML
+	private Label missedRF;
+	@FXML
+	private Label FnameStar;
+	@FXML
+	private Label LnameStar;
+	@FXML
+	private Label IDStar;
+	@FXML
+	private Label EmailStar;
+	@FXML
+	private Label RepassStar;
+	@FXML
+	private Label typeStar;
+	
+	@FXML
 	private TextField pass;
 
 	@FXML
 	private TextField rePass;
 
 	@FXML
-	private ChoiceBox<?> cusType;
-
+	private ComboBox  cusType;
+	
+	@FXML
+	private Label badPassword;
 	@FXML
 	private MenuItem buyProduct = null;
 	@FXML
@@ -96,6 +118,49 @@ public class UpdateCustomerInformationController {
 	@FXML
 	private MenuItem addcar = null;
 
+User us = new User(null, null, null, null, null, null);
+Employee emp = new Employee(null, null, null, null, null, null, null, null, null);
+ObservableList<String> Ctype=FXCollections.observableArrayList("Private","Bussiness");
+
+	public void initialize() 
+	{	
+		cusType.setValue("choose");
+		cusType.setItems(Ctype);
+		badPassword.setVisible(false);
+		missedRF.setVisible(false);	
+		FnameStar.setVisible(false);
+		LnameStar.setVisible(false);
+		IDStar.setVisible(false);
+		EmailStar.setVisible(false);
+		RepassStar.setVisible(false);
+		typeStar.setVisible(false);
+		
+		us=ChatClient.User;
+		emp=ChatClient.emp;
+		System.out.println("employee data: "+emp);
+
+		if(ChatClient.flag==1) 
+		{
+			this.id.setText(us.getId());
+			this.Fname.setText(us.getFName());
+			this.Lname.setText(us.getLName());
+			this.email.setText(us.getEmail());	
+			this.userlbl.setText(us.getUsername());
+		}
+		if(ChatClient.flag==2) 
+		{
+			this.id.setText(emp.getId());
+			this.Fname.setText(emp.getFName());
+			this.Lname.setText(emp.getLName());
+			this.email.setText(emp.getEmail());	
+			this.userlbl.setText(emp.getUsername());
+
+		}
+
+	}
+
+	
+	
 	public void loadUser(User e) {
 		this.id.setText(e.getId());
 		this.Fname.setText(e.getFName());
@@ -380,35 +445,128 @@ public class UpdateCustomerInformationController {
 		primaryStage.show();
 
 	}
+	boolean IsEmpty(TextField ob )
+	{
+		if(ob.getText().isEmpty())
+			return true;
+		return false;
+	}
 
+	int nothingEmpty=1;
 	@FXML
 	void updateBtn(ActionEvent event) throws IOException {
 		ArrayList<String> employeesArrayList = new ArrayList<String>();
-		System.out.println("Saving The New Data In The Server");
-		employeesArrayList.add("UpdateUser");
-		if(ChatClient.flag==1)
-			employeesArrayList.add(ChatClient.User.getUsername());
-		employeesArrayList.add(ChatClient.User.getPassword());
-		employeesArrayList.add(this.id.getText());
-		employeesArrayList.add(this.Fname.getText());
-		employeesArrayList.add(this.Lname.getText());
-		employeesArrayList.add(this.email.getText());
-		ClientUI.chat.accept(employeesArrayList);
-
-		FXMLLoader loader = new FXMLLoader();
-
-		((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
-
-		Stage primaryStage = new Stage();
-
-		Pane root = loader.load(getClass().getResource("/gui/updatedsuccessful.fxml").openStream());
-
-		Scene scene = new Scene(root);
-		primaryStage.setTitle("updated successfully!");
-
-		primaryStage.setScene(scene);
-		primaryStage.show();
-
+		String password,repassword;
+		password=this.pass.getText();
+		repassword=this.rePass.getText();
+		if(IsEmpty(this.Fname))
+		{
+			FnameStar.setVisible(true);
+			missedRF.setVisible(true);
+		}
+		else
+		{
+			FnameStar.setVisible(false);
+			missedRF.setVisible(false);
+		}
+		if(IsEmpty(this.Lname))
+		{
+			LnameStar.setVisible(true);
+			missedRF.setVisible(true);
+		}
+		else
+		{
+			LnameStar.setVisible(false);
+			missedRF.setVisible(false);
+		}
+		if(IsEmpty(this.id))
+		{
+			IDStar.setVisible(true);
+			missedRF.setVisible(true);
+		}
+		else
+		{
+			IDStar.setVisible(false);
+			missedRF.setVisible(false);
+		}
+		if(IsEmpty(this.email))
+		{
+			EmailStar.setVisible(true);
+			missedRF.setVisible(true);
+		}
+		else
+		{
+			EmailStar.setVisible(false);
+			missedRF.setVisible(false);
+		}
+		if(IsEmpty(this.rePass)&&!(IsEmpty(this.pass)))
+		{
+			RepassStar.setVisible(true);
+			missedRF.setVisible(true);
+		}
+		else
+		{
+			RepassStar.setVisible(false);
+			missedRF.setVisible(false);
+		}
+		if(cusType.getValue().equals("choose"))
+		{
+			typeStar.setVisible(true);
+			missedRF.setVisible(true);
+		}
+		else
+		{
+			typeStar.setVisible(false);
+			missedRF.setVisible(false);
+		}
+		if(!(IsEmpty(this.Fname))&&!(IsEmpty(this.Lname))&&!(IsEmpty(this.id))&&!(IsEmpty(this.email))&&!(IsEmpty(this.rePass))&&!(cusType.getValue().equals("choose")))
+		{
+			System.out.println("Saving The New Data In The Server");
+			employeesArrayList.add("UpdateUser");
+			if(ChatClient.flag==1) 
+			{
+				employeesArrayList.add(ChatClient.User.getUsername());
+				employeesArrayList.add(ChatClient.User.getPassword());		
+			}
+			if(ChatClient.flag==2) 
+			{
+				employeesArrayList.add(ChatClient.emp.getUsername());
+				employeesArrayList.add(ChatClient.emp.getPassword());		
+			}
+	
+			employeesArrayList.add(this.id.getText());
+			employeesArrayList.add(this.Fname.getText());
+			employeesArrayList.add(this.Lname.getText());
+			employeesArrayList.add(this.email.getText());
+			System.out.println(password.equals(repassword));
+			if(password.equals(repassword))
+			{
+				badPassword.setVisible(false);
+				employeesArrayList.add(this.pass.getText());
+				ClientUI.chat.accept(employeesArrayList);
+				FXMLLoader loader = new FXMLLoader();
+	
+				((Node) event.getSource()).getScene().getWindow().hide(); // hiding primary window
+	
+				Stage primaryStage = new Stage();
+	
+				Pane root = loader.load(getClass().getResource("/gui/updatedsuccessful.fxml").openStream());
+	
+				Scene scene = new Scene(root);
+				primaryStage.setTitle("updated successfully!");
+	
+				primaryStage.setScene(scene);
+				primaryStage.show();
+	
+			}
+			else
+			{
+				badPassword.setVisible(true);
+				this.pass.clear();
+				this.rePass.clear();
+			}
+		
+		}
 	}
 
 	@FXML

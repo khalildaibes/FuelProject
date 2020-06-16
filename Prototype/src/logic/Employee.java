@@ -20,8 +20,8 @@ public class Employee extends User {
 	 * @param comp
 	 * @param role
 	 */
-	public Employee(String id,String firstname,String lasttname, String email, String username,String password ,String employee_num, String station_id1,String role) {
-		super(username,id,password,firstname,lasttname,email);
+	public Employee(String id,String firstname,String lastname, String email, String username,String password ,String employee_num, String station_id1,String role) {
+		super(username,id,password,firstname,lastname,email);
 		
 		setStation_id(station_id1);
 		this.role=role;
