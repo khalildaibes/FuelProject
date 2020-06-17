@@ -11,10 +11,10 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="700.0" prefWidth="985.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/10.0.2" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OrderHistoryController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="0.0" prefHeight="700.0" prefWidth="985.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.OrderHistoryController">
    <children>
    
-<MenuButton fx:id="info"  layoutX="304.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Information">
+<MenuButton fx:id="info" layoutX="304.0" layoutY="121.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="100.0" style="-fx-background-color: transparent;" text="Information">
          <items>
             <MenuItem fx:id="showProfile1" onAction="#showProfile" text="Personal Information" />
             <MenuItem fx:id="subsPlan" mnemonicParsing="false" onAction="#subsPlan" text="Subscription Information" />
@@ -97,7 +97,7 @@
       <TableView fx:id="orderHistorytbl" layoutX="270.0" layoutY="250.0" prefHeight="297.0" prefWidth="531.0">
         <columns>
           <TableColumn fx:id="orderIDCulm" prefWidth="107.0" text="Order ID" />
-          <TableColumn fx:id="clientNumberCulm" prefWidth="90.0" text="Client Number" />
+          <TableColumn fx:id="productIDCulm" prefWidth="90.0" text="Product ID" />
             <TableColumn fx:id="productNameCulm" prefWidth="90.0" text="Product Name" />
             <TableColumn fx:id="orderDateCulm" prefWidth="89.0" text="Order Date" />
             <TableColumn fx:id="amountCulm" prefWidth="71.0" text="Amount" />

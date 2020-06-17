@@ -98,18 +98,18 @@
             <Image url="file:///C:/provectv0.0/from moose da boss 10jun20/Prototype/src/gui/Main/usergreen.png" />
          </image>
       </ImageView>
+      <Button fx:id="showProductDetails" layoutX="758.0" layoutY="275.0" mnemonicParsing="false" onAction="#showProductDetails" text="Show more" />
       <Button fx:id="logoutBtn" layoutX="885.0" layoutY="60.0" mnemonicParsing="false" onAction="#logoutBtn" style="-fx-background-color: transparent;" text="Log out" underline="true">
          <font>
             <Font size="20.0" />
          </font>
       </Button>
-      <TableView fx:id="productsList" layoutX="193.0" layoutY="232.0" prefHeight="339.0" prefWidth="685.0">
+      <TableView fx:id="productsList" layoutX="193.0" layoutY="234.0" prefHeight="339.0" prefWidth="562.0">
         <columns>
           <TableColumn fx:id="pname" prefWidth="170.9999237060547" text="Product Name" />
           <TableColumn fx:id="pid" prefWidth="119.0" text="Product ID" />
             <TableColumn fx:id="price" prefWidth="113.0" text="Price" />
             <TableColumn fx:id="quantity" prefWidth="159.0" text="Quantity available" />
-            <TableColumn fx:id="ShowDetails" prefWidth="122.0" text="Show Details" />
         </columns>
       </TableView>
    </children>
