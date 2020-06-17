@@ -5,7 +5,8 @@ import java.util.ArrayList;
 public class GasStation {
 	private String stationID;
 	private ArrayList<Product> product_list = new ArrayList<Product>();
-	//private StationManager manager;
+
+
 	private String company_name;
 	private ArrayList<Employee> worker_list = new ArrayList<Employee>();
 	
@@ -28,6 +29,7 @@ public class GasStation {
 	}
 	public void setProduct_list(ArrayList<Product> product_list) {
 		this.product_list = product_list;
+
 	}/*
 	public StationManager getManager() {
 		return manager;
@@ -35,6 +37,7 @@ public class GasStation {
 	public void setManager(StationManager manager) {
 		this.manager = manager;
 	}*/
+
 	public String getCompany_name() {
 		return company_name;
 	}
@@ -46,13 +49,17 @@ public class GasStation {
 	}
 	public void setWorker_list(ArrayList<Employee> worker_list) {
 		this.worker_list = worker_list;
+
 	}/*
 	public GasStation(String stationID, ArrayList<Product> product_list, StationManager manager, String company_name,
+=======
+	}
+	public GasStation(String stationID, ArrayList<Product> product_list, String company_name,
+>>>>>>> origin
 			ArrayList<Employee> worker_list) {
 		super();
 		this.stationID = stationID;
 		this.product_list = product_list;
-		this.manager = manager;
 		this.company_name = company_name;
 		this.worker_list = worker_list;
 	}*/

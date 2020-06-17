@@ -20,6 +20,7 @@ public class Employee extends User {
 	 * @param comp
 	 * @param role
 	 */
+
 	public Employee(String id,String firstname,String lasttname, String email, String username,String password ,String employee_num, String station_id1,String role) {
 		super(username,id,password,firstname,lasttname,email);
 		setEmployee_num(employee_num);
