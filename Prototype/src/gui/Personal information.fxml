@@ -2,7 +2,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.MenuButton?>
 <?import javafx.scene.control.MenuItem?>
 
@@ -128,16 +128,6 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <Label fx:id="userlbl" prefHeight="20.0" prefWidth="110.0" text="			" GridPane.columnIndex="2" GridPane.rowIndex="0" underline="true">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <Label  prefHeight="20.0" prefWidth="110.0" text="UserName :" GridPane.columnIndex="1" GridPane.rowIndex="0" >
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
             <Label prefHeight="25.0" prefWidth="80.0" text="Password :" GridPane.columnIndex="1" GridPane.rowIndex="5">
                <font>
                   <Font size="16.0" />
@@ -145,7 +135,12 @@
             </Label>
             <TextField fx:id="Lname" GridPane.columnIndex="2" GridPane.rowIndex="2" />
             <TextField fx:id="id" prefHeight="25.0" prefWidth="126.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-            <Label fx:id="badPassword" text="Invalid Password" textFill="#dd1313" GridPane.columnIndex="3" GridPane.rowIndex="5">
+            <Label text="Invalid ID" textFill="#dd1313" GridPane.columnIndex="3" GridPane.rowIndex="3">
+               <padding>
+                  <Insets left="10.0" />
+               </padding>
+            </Label>
+            <Label prefHeight="17.0" prefWidth="101.0" text="Invalid address" textFill="#dd1313" GridPane.columnIndex="3" GridPane.rowIndex="4">
                <padding>
                   <Insets left="10.0" />
                </padding>
@@ -157,12 +152,18 @@
             </Label>
             <TextField fx:id="Fname" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <TextField fx:id="email" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-
-            <Label fx:id="FnameStar" prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="1" />
-            <Label fx:id="LnameStar" prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="2" />
-            <Label fx:id="IDStar" prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="3" />
-            <Label fx:id="EmailStar" prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="4" />
-            <Label  prefHeight="25.0" prefWidth="141.0" text="Repeat Password :" GridPane.columnIndex="1" GridPane.rowIndex="6">
+            <Label text="Customer ID :" GridPane.columnIndex="1">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <Label fx:id="customerId" text="                                 " underline="true" GridPane.columnIndex="2" />
+            <Label prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="1" />
+            <Label prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="2" />
+            <Label prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="3" />
+            <Label prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="4" />
+            <Label prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="5" />
+            <Label prefHeight="25.0" prefWidth="141.0" text="Repeat Password :" GridPane.columnIndex="1" GridPane.rowIndex="6">
                <font>
                   <Font size="16.0" />
                </font>
@@ -174,9 +175,10 @@
                   <Font size="16.0" />
                </font>
             </Label>
-            <ComboBox fx:id="cusType" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-            <Label fx:id="RepassStar" prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="6" />
-            <Label fx:id="typeStar" prefHeight="17.0" prefWidth="0.0" text="*" textFill="#eb0202" GridPane.rowIndex="7" />
+            <ChoiceBox fx:id="cusType" prefWidth="150.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+            <Label prefHeight="17.0" prefWidth="0.0" text="*" textFill="#eb0202" GridPane.rowIndex="5" />
+            <Label prefHeight="17.0" prefWidth="9.0" text="*" textFill="#eb0202" GridPane.rowIndex="6" />
+            <Label prefHeight="17.0" prefWidth="0.0" text="*" textFill="#eb0202" GridPane.rowIndex="7" />
          </children>
       </GridPane>
       <Label contentDisplay="TOP" layoutX="399.0" layoutY="163.0" text="Personal Information" underline="true">
@@ -189,7 +191,7 @@
             <Font size="10.0" />
          </font>
       </Label>
-      <Label fx:id="missedRF" layoutX="351.0" layoutY="553.0" prefHeight="25.0" prefWidth="432.0" text="* - You Missed a Required Field" textFill="#e80a0a">
+      <Label layoutX="351.0" layoutY="553.0" prefHeight="25.0" prefWidth="432.0" text="* - You Missed a Required Field ( First Name, Last Name... )" textFill="#e80a0a">
          <font>
             <Font size="13.0" />
          </font>
