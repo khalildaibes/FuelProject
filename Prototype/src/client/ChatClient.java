@@ -136,7 +136,6 @@ public class ChatClient extends AbstractClient {
 				Vehicle temp;
 			while(i<cmd.size()) {
 				temp=new Vehicle(cmd.get(i++),cmd.get(i++),cmd.get(i++),cmd.get(i++),cmd.get(i++));
-				
 				cars.add(temp);
 				System.out.println(temp);
 			}

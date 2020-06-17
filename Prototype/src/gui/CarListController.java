@@ -38,7 +38,8 @@ import logic.Vehicle;
 
 
 public class CarListController  implements Initializable
-{	ObservableList<Vehicle> list= FXCollections.observableArrayList();
+{	
+		ObservableList<Vehicle> list= FXCollections.observableArrayList();
 
 	 	@FXML
 	    private Button backHome;
@@ -47,25 +48,18 @@ public class CarListController  implements Initializable
 	    private Button deleteBtn;
 	 	
 	    @FXML
-	    private TableView<Vehicle> vehicleList;
+	    private TableView <Vehicle> vehicleList;
 	    @FXML
-	    private TableColumn<Vehicle, String> carIdCulm;
+	    private TableColumn <Vehicle, String> carIdCulm;
+	    @FXML
+	    private TableColumn <Vehicle, String> fuelTypeCulm;
 
 	    @FXML
-	    private TableColumn<Vehicle, String> customerIdCulm;
-
+	    private TableColumn <Vehicle, String> planIdCulm;
 	    @FXML
-	    private TableColumn<Vehicle, String> modelCulm;
-
-	    @FXML
-	    private TableColumn<Vehicle, String> dalkanCulm;
-
-	    @FXML
-	    private TableColumn<Vehicle, String> fuelTypeCulm;
-
-	    @FXML
-	    private TableColumn<Vehicle, String> planIdCulm;
-
+	    private TableColumn <Vehicle, String> dalkanCulm;
+	    
+	    
 	    @FXML
 	    private Button logoutBtn;
 
@@ -400,6 +394,16 @@ public class CarListController  implements Initializable
 	    @FXML
 	    void deleteBtn(ActionEvent event) throws IOException 
 	    {
+	    	
+	    	
+	    	
+	    	Vehicle carSelected =new Vehicle(null, null, null, null, null);
+	    	carSelected = vehicleList.getSelectionModel().getSelectedItem();
+	    	
+	    	System.out.println("selected car: "+carSelected);
+	    	
+	    	
+	    	
 	    	/*FXMLLoader loader = new FXMLLoader();
 
 			
@@ -442,35 +446,33 @@ public class CarListController  implements Initializable
 					
 			 */
 			carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicle_id"));
-			customerIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("owner"));
-			modelCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("model"));
-			
 			fuelTypeCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("fuel_type"));
-			
-			planIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("package_id"));
-		
+			dalkanCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("dalkan"));
+			planIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("plan_id"));
 			ArrayList<String> cmd=new ArrayList<String>();
 			cmd.add("GetVehicleListForUser");
-			cmd.add(ChatClient.emp.getUsername());
-			cmd.add(ChatClient.emp.getPassword());
+			cmd.add("ben");//////////////////////////////////////////////////////////////////////////////////////
+			cmd.add("333320156");
 			ClientUI.chat.accept(cmd);
 			load_Vehicle_List();
 			
 		}
 		
 	
-		private void load_Vehicle_List() {
+		private void load_Vehicle_List() 
+		{
 			// TODO Auto-generated method stub
-			ArrayList<Vehicle> cars =ChatClient.cars;
-			for(int i=0;i<cars.size();i++) {
+			ArrayList<Vehicle> cars = ChatClient.cars;
+			System.out.println("cars: "+cars);
+			System.out.println(cars.size());
+
+			for(int i=0;i<cars.size();i++) 
+			{
 				list.add(cars.get(i));
+				System.out.println("in list: "+list.get(i));
+
 			}
-			vehicleList.setItems(list);
-	
-		
-		 
-		
-			
+				vehicleList.setItems(list);
 		}
 
 

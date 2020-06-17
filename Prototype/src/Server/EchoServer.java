@@ -144,7 +144,7 @@ public class EchoServer extends AbstractServer {
 
 			cmd = extracted(msg);
 			String id = getEmployeeIdUsingUsername(cmd);
-			String str = ("SELECT * FROM vehicle WHERE owner_id= (?) ;");
+			String str = ("SELECT * FROM vehicle WHERE customer_id= (?) ;");
 			PreparedStatement st = conn.prepareStatement(str);
 			st.setString(1, id);
 			ResultSet rs = st.executeQuery();
@@ -214,7 +214,7 @@ public class EchoServer extends AbstractServer {
 
 			cmd = extracted(msg);
 			String id = getEmployeeIdUsingUsername(cmd);
-			String str = ("SELECT * FROM vehicle WHERE owner_id= (?) ;");
+			String str = ("SELECT * FROM vehicle WHERE customer_id= (?) ;");
 			PreparedStatement st = conn.prepareStatement(str);
 			st.setString(1, id);
 			ResultSet rs = st.executeQuery();
