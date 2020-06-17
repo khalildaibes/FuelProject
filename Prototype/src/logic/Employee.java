@@ -12,6 +12,7 @@ public class Employee extends User {
 	
 	private String station_id;
 	private String role;
+	private String employee_num;
 		/**
 	 * @param id
 	 * @param name
@@ -19,9 +20,9 @@ public class Employee extends User {
 	 * @param comp
 	 * @param role
 	 */
-	public Employee(String username,String id, String password ,String Fname, String Lname,String email, String station_id1,String role) {
-		super(username,id,password,Fname,Lname,email);
-		
+	public Employee(String id,String firstname,String lasttname, String email, String username,String password ,String employee_num, String station_id1,String role) {
+		super(username,id,password,firstname,lasttname,email);
+		setEmployee_num(employee_num);
 		setStation_id(station_id1);
 		this.role=role;
 		
@@ -51,6 +52,16 @@ public class Employee extends User {
 
 	public void setStation_id(String satation_id) {
 		this.station_id = satation_id;
+	}
+
+
+	public String getEmployee_num() {
+		return employee_num;
+	}
+
+
+	public void setEmployee_num(String employee_num) {
+		this.employee_num = employee_num;
 	}
 	
 }

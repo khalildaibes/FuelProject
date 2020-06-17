@@ -468,21 +468,17 @@ public void tracker(ActionEvent event) throws Exception
 		// TODO Auto-generated method stub
 		/* carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("vehicle id "));
 		 carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("owner id  "));
-		 carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("a id "));
-				
+		 carIdCulm.setCellValueFactory(new PropertyValueFactory<Vehicle, String>("a id "));			
 		 */
 		pname.setCellValueFactory(new PropertyValueFactory<Product, String>("name"));
 		pid.setCellValueFactory(new PropertyValueFactory<Product, String>("product_id"));
 		price.setCellValueFactory(new PropertyValueFactory<Product, String>("price"));
-		
 		quantity.setCellValueFactory(new PropertyValueFactory<Product, String>("quantity"));
-		
-		
 		ArrayList<String> cmd=new ArrayList<String>();
 		cmd.add("GetProductListForGsdStation");
 		cmd.add(ChatClient.emp.getUsername());
 		cmd.add(ChatClient.emp.getPassword());
-		cmd.add("123456");///gas station id 
+		cmd.add("635124");///gas station id 
 		ClientUI.chat.accept(cmd);
 		load_Products_List();
 		

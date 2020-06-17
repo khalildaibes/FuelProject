@@ -1,6 +1,8 @@
 package gui;
 
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 import javax.swing.JFrame;
 
@@ -10,6 +12,7 @@ import client.ClientUI;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -22,7 +25,7 @@ import javafx.stage.Stage;
 import javafx.stage.Window;
 import logic.Employee;
 
-public class SalesController 
+public class SalesController  implements Initializable
 {
 	@FXML
 	private Button backHome=null;
@@ -374,6 +377,13 @@ public void tracker(ActionEvent event) throws Exception
 		primaryStage.show();
 
 
+	}
+	@Override
+	public void initialize(URL arg0, ResourceBundle arg1) {
+		// TODO Auto-generated method stub
+		
+		
+		
 	}
 
 }

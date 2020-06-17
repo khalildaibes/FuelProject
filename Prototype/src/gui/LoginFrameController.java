@@ -58,7 +58,6 @@ public class LoginFrameController {
 
 		Scene scene = new Scene(root);
 		primaryStage.setTitle("Station Finder");
-
 		primaryStage.setScene(scene);
 		primaryStage.show();
 	}

@@ -35,7 +35,7 @@ public class ChatClient extends AbstractClient {
 	 */
 	ChatIF clientUI;
 	public static int flag=0;///1 if user is logged in 2 if employee is logged in 
-	public static Employee emp = new Employee(null, null, null, null, null, null, null, null);
+	public static Employee emp = new Employee(null, null, null, null, null, null, null, null,null);
 	public static boolean awaitResponse = false;
 	public static ArrayList<Vehicle> cars=new ArrayList<Vehicle>();
 	public static ArrayList<Order> Orders=new ArrayList<Order>();
@@ -105,8 +105,8 @@ public class ChatClient extends AbstractClient {
 		}
 		if (cmd.get(0).equals("EmployeeData")) {
 			try {
-				this.emp = new Employee(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6),cmd.get(10),cmd.get(11));
-				System.out.println("employee data recived");
+				this.emp = new Employee(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6),cmd.get(7),cmd.get(8),cmd.get(9) );
+					System.out.println("employee data recived");
 			}catch (Exception e) {
 				// TODO: handle exception
 			}
@@ -114,7 +114,7 @@ public class ChatClient extends AbstractClient {
 
 		if (cmd.get(0).equals("ProductsDataForGasStation")) {
 			try {
-				cars.clear();
+				products.clear();
 				int i=1;
 				Product temp;
 			while(i<cmd.size()) {
@@ -149,7 +149,7 @@ public class ChatClient extends AbstractClient {
 		if (cmd.get(0).equals("EmployeeLoggedIn")) {  
 			try {
 				this.flag=2;
-			this.emp = new Employee(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6),cmd.get(10),cmd.get(11));
+			this.emp = new Employee(cmd.get(1),cmd.get(2), cmd.get(3) , cmd.get(4), cmd.get(5),cmd.get(6),cmd.get(7),cmd.get(8),cmd.get(9));
 			System.out.println("employee has logged in ");
 
 			}catch (Exception e) {
